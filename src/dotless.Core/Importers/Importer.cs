@@ -156,9 +156,11 @@ namespace dotless.Core.Importers
 
             var file = import.Path;
             
-            if (!IsNonRelativeUrl(file)) 
+            if (!IsNonRelativeUrl(file))
             {
-                file = GetAdjustedFilePath(import.Path, _paths);
+                file = GetAdjustedFilePath(import.Path, new List<string> {
+                    Path.GetDirectoryName(import.Location.FileName)
+                });
             }
 
             if (CheckIgnoreImport(import, file))
